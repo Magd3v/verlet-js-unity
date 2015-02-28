@@ -35,7 +35,7 @@ public class GrabHandler : Singleton<GrabHandler>
                     mouseGrabComp = new Composite();
                     mouseGrabComp.particles.Add(new Particle(MouseGamePos));
                     mouseGrabComp.constraints.Add(new DistanceConstraint(holdingParticle, mouseGrabComp.particles[0], 0.02f));
-                    VerletHandler.Instance.CreateBody(mouseGrabComp);
+                    VerletHandler.Instance.CreateComposite(mouseGrabComp);
                 }
             }
         }
@@ -48,7 +48,7 @@ public class GrabHandler : Singleton<GrabHandler>
                 var vPoint = info.collider.gameObject.GetComponent<VerletPoint>();
                 if (vPoint != null)
                 {
-                    VerletHandler.instance.DestroyBody(vPoint.parentComp);
+                    VerletHandler.instance.DestroyComposite(vPoint.parentComp);
                 }
             }
         }
@@ -60,7 +60,7 @@ public class GrabHandler : Singleton<GrabHandler>
 
             if (mouseGrabComp != null)
             {
-                VerletHandler.Instance.DestroyBody(mouseGrabComp);
+                VerletHandler.Instance.DestroyComposite(mouseGrabComp);
                 mouseGrabComp = null;
             }
         }

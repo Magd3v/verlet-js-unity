@@ -4,7 +4,7 @@ using UnityEngine;
 public class VerletHandler : Singleton<VerletHandler>
 {
     public Verlet World;
-    public Dictionary<Particle, GameObject> vertObDict;
+    public Dictionary<Particle, GameObject> partObDict;
     public Dictionary<Composite, GameObject> compObDict;
     [SerializeField] float width = 8000;
     [SerializeField] float height = 3000;
@@ -12,7 +12,7 @@ public class VerletHandler : Singleton<VerletHandler>
 
     void Awake()
     {
-        vertObDict = new Dictionary<Particle, GameObject>();
+        partObDict = new Dictionary<Particle, GameObject>();
         compObDict = new Dictionary<Composite, GameObject>();
         compositeConstraintCounts = new Dictionary<Composite, int>();
         World = new Verlet(width, height);
@@ -20,24 +20,24 @@ public class VerletHandler : Singleton<VerletHandler>
         World.gravity.y = 1f;
     }
 
-    public void CreateBody(Composite comp)
+    public void CreateComposite(Composite comp)
     {
         compositeConstraintCounts.Add(comp, 0);
         World.composites.Add(comp);
-        compObDict.Add(comp, RebuildBody(comp));
+        compObDict.Add(comp, RebuildCompositeModel(comp));
     }
 
-    public GameObject RebuildBody(Composite comp)
+    public GameObject RebuildCompositeModel(Composite comp)
     {
         if (compObDict.ContainsKey(comp))
             Destroy(compObDict[comp]);
 
         foreach (Particle p in comp.particles)
         {
-            vertObDict.Remove(p);
+            partObDict.Remove(p);
         }
 
-        var bodyGameOb = new GameObject("body");
+        var bodyGameOb = new GameObject("comp");
 
         foreach (Particle p in comp.particles)
         {
@@ -48,7 +48,7 @@ public class VerletHandler : Singleton<VerletHandler>
             verletPoint.particle = p;
             verletPoint.parentComp = comp;
 
-            vertObDict.Add(p, particleGameOb);
+            partObDict.Add(p, particleGameOb);
         }
 
         foreach (Constraint c in comp.constraints)
@@ -60,14 +60,14 @@ public class VerletHandler : Singleton<VerletHandler>
                 constraintGameOb.transform.parent = bodyGameOb.transform;
 
                 var verletConstraint = constraintGameOb.AddComponent<VerletConstraint>();
-                verletConstraint.p1 = vertObDict[dc.a].GetComponent<VerletPoint>();
-                verletConstraint.p2 = vertObDict[dc.b].GetComponent<VerletPoint>();
+                verletConstraint.p1 = partObDict[dc.a].GetComponent<VerletPoint>();
+                verletConstraint.p2 = partObDict[dc.b].GetComponent<VerletPoint>();
                 verletConstraint.parentComp = comp;
                 verletConstraint.constraint = c;
 
                 var lineRenderer = constraintGameOb.AddComponent<MagLineRenderer>();
-                lineRenderer.p1 = vertObDict[dc.a].transform;
-                lineRenderer.p2 = vertObDict[dc.b].transform;
+                lineRenderer.p1 = partObDict[dc.a].transform;
+                lineRenderer.p2 = partObDict[dc.b].transform;
 
                 compositeConstraintCounts[comp] += 1;
             }
@@ -78,18 +78,18 @@ public class VerletHandler : Singleton<VerletHandler>
         return bodyGameOb;
     }
 
-    public void DestroyBody(Composite body)
+    public void DestroyComposite(Composite comp)
     {
-        foreach (Particle p in body.particles)
+        foreach (Particle p in comp.particles)
         {
-            if (vertObDict.ContainsKey(p))
+            if (partObDict.ContainsKey(p))
             {
-                Destroy(vertObDict[p].transform.parent.gameObject);
-                vertObDict.Remove(p);
+                Destroy(partObDict[p].transform.parent.gameObject);
+                partObDict.Remove(p);
             }
         }
 
-        World.composites.Remove(body);
+        World.composites.Remove(comp);
     }
 
     void Update()
@@ -102,8 +102,8 @@ public class VerletHandler : Singleton<VerletHandler>
             foreach (Particle p in composite.particles)
             {
                 if (p == null) continue;
-                if (!vertObDict.ContainsKey(p)) continue;
-                vertObDict[p].transform.position = new Vector3(p.pos.x, -p.pos.y, 0);
+                if (!partObDict.ContainsKey(p)) continue;
+                partObDict[p].transform.position = new Vector3(p.pos.x, -p.pos.y, 0);
             }
         }
     }

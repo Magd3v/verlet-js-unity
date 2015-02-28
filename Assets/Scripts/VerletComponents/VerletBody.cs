@@ -23,23 +23,23 @@ public class VerletBody : MonoBehaviour
         VerletPoint[] childPoints = GetComponentsInChildren<VerletPoint>();
 
         //Create verts
-        List<Particle> verts = new List<Particle>();
+        List<Particle> particles = new List<Particle>();
         foreach (VerletPoint p in childPoints)
         {
-            var vert = new Particle(new Vector2(p.transform.position.x, -p.transform.position.y));
-            if (p.Anchored) body.constraints.Add(new PinConstraint(vert));
+            var particle = new Particle(new Vector2(p.transform.position.x, -p.transform.position.y));
+            if (p.Anchored) body.constraints.Add(new PinConstraint(particle));
             p.parentComp = body;
 
-            VerletHandler.Instance.vertObDict.Add(vert, p.gameObject);
-            p.particle = vert;
-            verts.Add(vert);
-            body.particles.Add(vert);
+            VerletHandler.Instance.partObDict.Add(particle, p.gameObject);
+            p.particle = particle;
+            particles.Add(particle);
+            body.particles.Add(particle);
         }
 
-        VerletConstraint[] childEdges = GetComponentsInChildren<VerletConstraint>();
+        VerletConstraint[] childConstraints = GetComponentsInChildren<VerletConstraint>();
 
         //Link em up
-        foreach (VerletConstraint e in childEdges)
+        foreach (VerletConstraint e in childConstraints)
         {
             Constraint c = new DistanceConstraint(e.p1.particle, e.p2.particle, e.stiffness);
             body.constraints.Add(c);

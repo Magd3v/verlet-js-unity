@@ -15,24 +15,24 @@ public class SandboxController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Composite box = CompositeCreator.CreateBox(GrabHandler.Instance.MouseGamePos);
-            VerletHandler.Instance.CreateBody(box);
+            VerletHandler.Instance.CreateComposite(box);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             Composite rope = CompositeCreator.CreateRope(GrabHandler.Instance.MouseGamePos);
-            VerletHandler.Instance.CreateBody(rope);
+            VerletHandler.Instance.CreateComposite(rope);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             Composite rope = CompositeCreator.CreateRope(GrabHandler.Instance.MouseGamePos);
             Particle lastRopeSegment = rope.particles.Last();
-            VerletHandler.Instance.CreateBody(rope);
+            VerletHandler.Instance.CreateComposite(rope);
 
             Composite box = CompositeCreator.CreateBox(lastRopeSegment.pos, false);
             box.constraints.Add(new DistanceConstraint(box.particles[0], lastRopeSegment, 0.25f));
-            VerletHandler.Instance.CreateBody(box);
+            VerletHandler.Instance.CreateComposite(box);
         }
     }
 }
