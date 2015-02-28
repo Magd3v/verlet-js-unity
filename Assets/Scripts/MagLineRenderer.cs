@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using UnityEngine;
+﻿using UnityEngine;
 
 [ExecuteInEditMode]
 public class MagLineRenderer : MonoBehaviour
@@ -34,11 +33,7 @@ public class MagLineRenderer : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-    }
-
-    void OnRenderObject() 
+    void OnWillRenderObject() 
     {
         /*
         if (lineMesh != null && lineMesh.vertices.Length > 1 && p1 != null && p2 != null)
