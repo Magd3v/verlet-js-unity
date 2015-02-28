@@ -28,11 +28,11 @@ public class SandboxController : MonoBehaviour
         {
             Composite rope = CompositeCreator.CreateRope(GrabHandler.Instance.MouseGamePos);
             Particle lastRopeSegment = rope.particles.Last();
-            VerletHandler.Instance.CreateComposite(rope);
-
+            
             Composite box = CompositeCreator.CreateBox(lastRopeSegment.pos, false);
             box.constraints.Add(new DistanceConstraint(box.particles[0], lastRopeSegment, 0.25f));
-            VerletHandler.Instance.CreateComposite(box);
+            
+            VerletHandler.Instance.CreateComposite(box + rope);
         }
     }
 }
