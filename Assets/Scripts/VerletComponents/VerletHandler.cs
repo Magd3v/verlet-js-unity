@@ -95,6 +95,15 @@ public class VerletHandler : Singleton<VerletHandler>
     void Update()
     {
         World.Update(16);
+
+        //Keep in bounds
+        foreach (Composite c in World.composites)
+        {
+            foreach (Particle p in c.particles)
+            {
+                p.pos = new Vector2(Mathf.Clamp(p.pos.x, 0, width), Mathf.Clamp(p.pos.y, -height, 0));
+            }
+        }
     }
 
     void OnDrawGizmos()
