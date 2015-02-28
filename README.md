@@ -16,15 +16,16 @@ get creative! I came up with lots of cool game ideas that didn't involve collisi
 
 <b>todo:</b>
 - nicer, cleaner frontend code
-- fix inconsistent naming conventions
 - more transparent api
 - optimize the line renderer. place vertices by shader? the current shader is weirdly slow.
 - 3d support
 
 <br>
 
+<!--
 <b>bugs:</b>
-- if you make a boxrope and delete the rope some weird stuff happens. weird issue with the delete code maybe?
+- 
+ -->
 
 <br>
 current issue with frontend:<br>
