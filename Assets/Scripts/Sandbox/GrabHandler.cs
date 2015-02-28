@@ -25,7 +25,7 @@ public class GrabHandler : Singleton<GrabHandler>
         if (Input.GetMouseButtonDown(0) && !isHolding)
         {
             RaycastHit info;
-            if (UnityEngine.Physics.SphereCast(cameraRay, 5f, out info, 1000f))
+            if (Physics.SphereCast(cameraRay, 5f, out info, 1000f))
             {
                 var vPoint = info.collider.gameObject.GetComponent<VerletPoint>();
                 if (vPoint != null)
@@ -43,7 +43,7 @@ public class GrabHandler : Singleton<GrabHandler>
         if (Input.GetMouseButtonDown(1))
         {
             RaycastHit info;
-            if (UnityEngine.Physics.SphereCast(cameraRay, 5f, out info, 1000f))
+            if (Physics.SphereCast(cameraRay, 5f, out info, 1000f))
             {
                 var vPoint = info.collider.gameObject.GetComponent<VerletPoint>();
                 if (vPoint != null)

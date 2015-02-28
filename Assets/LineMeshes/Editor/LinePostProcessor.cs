@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
+using UnityEngine;
 
 public class LineProcessor : Editor
 {
@@ -70,7 +69,7 @@ public class LineProcessor : Editor
 
     static void SaveLineFile() 
     {
-        LineModel lm = ScriptableObject.CreateInstance<LineModel>();
+        LineModel lm = CreateInstance<LineModel>();
         string modelFolderPath = Path.GetDirectoryName(inputFilePath) + "/LineModels";
         string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(modelFolderPath + "/" + inputFilename + ".asset");
 
