@@ -35,8 +35,6 @@ public class CompositeCreator
         comp.particles.AddRange(p);
         comp.constraints.AddRange(c);
 
-        VerletHandler.Instance.CreateBody(comp);
-
         return comp;
     }
 
@@ -66,8 +64,6 @@ public class CompositeCreator
 
             lastParticle = currentParticle;
         }
-
-        VerletHandler.Instance.CreateBody(comp);
 
         return comp;
     }
