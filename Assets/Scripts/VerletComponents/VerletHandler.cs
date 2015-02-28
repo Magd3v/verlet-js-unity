@@ -95,17 +95,6 @@ public class VerletHandler : Singleton<VerletHandler>
     void Update()
     {
         World.Update(16);
-
-        foreach (Composite composite in World.composites)
-        {
-            if (composite == null) continue;
-            foreach (Particle p in composite.particles)
-            {
-                if (p == null) continue;
-                if (!partObDict.ContainsKey(p)) continue;
-                partObDict[p].transform.position = new Vector3(p.pos.x, -p.pos.y, 0);
-            }
-        }
     }
 
     void OnDrawGizmos()
