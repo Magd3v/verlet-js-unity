@@ -19,6 +19,7 @@ get creative! I came up with lots of cool game ideas that didn't involve collisi
 - fix inconsistent naming conventions
 - more transparent api
 - optimize the line renderer. place vertices by shader? the current shader is weirdly slow.
+- 3d support
 
 
 <br>
