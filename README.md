@@ -2,7 +2,7 @@ verlet-js-unity by <a href="http://twitter.com/magdvv">@magdvv</a>
 
 a C# port of <a href="http://subprotocol.com/system/introducing-verlet-js.html">verlet-js</a> with some components to make it work in unity3d
 
-includes a <a href="https://github.com/bzgeb/UnityLineMeshes">line renderer</a> made using a rad technique by 
+includes a line renderer made using a <a href="https://github.com/bzgeb/UnityLineMeshes">rad technique</a> by 
 <a href="http://twitter.com/bzgeb">@bzgeb</a><br>
 
 <a href="http://whybotherplayinggameswhenyouwilljustdieandforgetthem.nfshost.com/verlet/">web player demo</a><br>
