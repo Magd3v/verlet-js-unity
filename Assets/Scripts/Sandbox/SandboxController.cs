@@ -3,15 +3,8 @@ using UnityEngine;
 
 public class SandboxController : MonoBehaviour
 {
-    [SerializeField] PixelScreen pScreen;
-
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            pScreen.LowResActive = !pScreen.LowResActive;
-        }
-
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Composite box = CompositeCreator.CreateBox(GrabHandler.Instance.MouseGamePos);
