@@ -41,8 +41,11 @@ public class VerletBody : MonoBehaviour
         //Link em up
         foreach (VerletConstraint e in childEdges)
         {
-            body.constraints.Add(new DistanceConstraint(e.p1.particle, e.p2.particle, e.stiffness));
+            Constraint c = new DistanceConstraint(e.p1.particle, e.p2.particle, e.stiffness);
+            body.constraints.Add(c);
             VerletHandler.Instance.compositeConstraintCounts[body] += 1;
+            e.parentComp = body;
+            e.constraint = c;
         }
 
         VerletHandler.Instance.World.composites.Add(body);

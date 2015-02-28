@@ -62,6 +62,8 @@ public class VerletHandler : Singleton<VerletHandler>
                 var verletConstraint = constraintGameOb.AddComponent<VerletConstraint>();
                 verletConstraint.p1 = vertObDict[dc.a].GetComponent<VerletPoint>();
                 verletConstraint.p2 = vertObDict[dc.b].GetComponent<VerletPoint>();
+                verletConstraint.parentComp = comp;
+                verletConstraint.constraint = c;
 
                 var lineRenderer = constraintGameOb.AddComponent<MagLineRenderer>();
                 lineRenderer.p1 = vertObDict[dc.a].transform;
