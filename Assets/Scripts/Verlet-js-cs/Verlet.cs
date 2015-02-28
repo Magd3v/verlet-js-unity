@@ -93,4 +93,14 @@ public class Composite
         constraints.Add(pc);
         return pc;
     }
+
+    public static Composite operator +(Composite c1, Composite c2)
+    {
+        Composite combined = new Composite();
+        combined.particles.AddRange(c1.particles);
+        combined.particles.AddRange(c2.particles);
+        combined.constraints.AddRange(c1.constraints);
+        combined.constraints.AddRange(c2.constraints);
+        return combined;
+    }
 }
