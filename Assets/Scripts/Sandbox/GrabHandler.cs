@@ -68,7 +68,7 @@ public class GrabHandler : Singleton<GrabHandler>
         cameraRay = cam.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
         gamePlane.Raycast(cameraRay, out rayDist);
         MouseGlobalPos = cameraRay.GetPoint(rayDist);
-        MouseGamePos = new Vector2(MouseGlobalPos.x, -MouseGlobalPos.y);
+        MouseGamePos = new Vector2(MouseGlobalPos.x, MouseGlobalPos.y);
 
         if (isHolding)
         {

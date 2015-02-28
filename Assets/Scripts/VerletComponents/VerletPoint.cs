@@ -15,7 +15,7 @@ public class VerletPoint : MonoBehaviour
 
     public void LateUpdate()
     {
-        transform.position = new Vector3(particle.pos.x, -particle.pos.y, 0);
+        transform.position = new Vector3(particle.pos.x, particle.pos.y, 0);
     }
 
     void OnDrawGizmos()
@@ -28,7 +28,7 @@ public class VerletPoint : MonoBehaviour
             Vector2 delta = particle.pos - particle.lastPos;
             Gizmos.color = Color.white;
             Gizmos.DrawLine(transform.position,
-                new Vector3(particle.pos.x, -particle.pos.y, 0) + new Vector3(delta.x, -delta.y, 0));
+                new Vector3(particle.pos.x, particle.pos.y, 0) + new Vector3(delta.x, delta.y, 0));
         }
     }
 }

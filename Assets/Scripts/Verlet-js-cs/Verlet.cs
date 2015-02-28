@@ -71,7 +71,7 @@ public class Verlet
 
     public void LimitToBounds(Particle p)
     {
-        p.pos = new Vector2(Mathf.Clamp(p.pos.x, 0, width), Mathf.Clamp(p.pos.y, 0, height));
+        p.pos = new Vector2(Mathf.Clamp(p.pos.x, 0, width), Mathf.Clamp(p.pos.y, -height, 0));
     }
 }
 

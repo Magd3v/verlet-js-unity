@@ -26,7 +26,7 @@ public class VerletBody : MonoBehaviour
         List<Particle> particles = new List<Particle>();
         foreach (VerletPoint p in childPoints)
         {
-            var particle = new Particle(new Vector2(p.transform.position.x, -p.transform.position.y));
+            var particle = new Particle(new Vector2(p.transform.position.x, p.transform.position.y));
             if (p.Anchored) body.constraints.Add(new PinConstraint(particle));
             p.parentComp = body;
 
@@ -59,7 +59,7 @@ public class VerletBody : MonoBehaviour
 
         foreach (Particle p in body.particles)
         {
-            totalAverage += new Vector3(p.pos.x, -p.pos.y, 0);
+            totalAverage += new Vector3(p.pos.x, p.pos.y, 0);
         }
 
         totalAverage = new Vector2(totalAverage.x / body.particles.Count, totalAverage.y / body.particles.Count);

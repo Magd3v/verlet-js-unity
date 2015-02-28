@@ -17,7 +17,7 @@ public class VerletHandler : Singleton<VerletHandler>
         compositeConstraintCounts = new Dictionary<Composite, int>();
         World = new Verlet(width, height);
         World.friction = 0.99f;
-        World.gravity.y = 1f;
+        World.gravity.y = -1f;
     }
 
     public void CreateComposite(Composite comp)
@@ -110,8 +110,8 @@ public class VerletHandler : Singleton<VerletHandler>
 
                 var dc = c as DistanceConstraint;
                 Gizmos.color = new Color(0.5f, 0.8f, 0.8f);
-                Gizmos.DrawLine(new Vector3(dc.a.pos.x, -dc.a.pos.y, 0),
-                    new Vector3(dc.b.pos.x, -dc.b.pos.y, 0));
+                Gizmos.DrawLine(new Vector3(dc.a.pos.x, dc.a.pos.y, 0),
+                    new Vector3(dc.b.pos.x, dc.b.pos.y, 0));
             }
         }
     }
