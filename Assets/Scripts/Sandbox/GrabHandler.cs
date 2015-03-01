@@ -3,13 +3,13 @@
 public class GrabHandler : Singleton<GrabHandler>
 {
     bool isHolding;
-    Particle holdingParticle;
     Ray cameraRay;
     Plane gamePlane;
     float rayDist = 1000f;
     Composite mouseGrabComp;
     Particle mouseGrabParticle;
     Camera cam;
+    Particle interactingParticle;
 
     public Vector2 MouseGamePos { get; private set; }
     public Vector3 MouseGlobalPos { get; private set; }
@@ -22,41 +22,52 @@ public class GrabHandler : Singleton<GrabHandler>
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isHolding)
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
         {
-            RaycastHit info;
-            if (Physics.SphereCast(cameraRay, 5f, out info, 1000f))
+            foreach (Composite c in VerletHandler.instance.World.composites)
             {
-                var vPoint = info.collider.gameObject.GetComponent<VerletPoint>();
-                if (vPoint != null)
+                foreach (Particle p in c.particles)
                 {
-                    holdingParticle = vPoint.particle;
-                    isHolding = true;
-                    mouseGrabComp = new Composite();
-                    mouseGrabComp.particles.Add(new Particle(MouseGamePos));
-                    mouseGrabComp.constraints.Add(new DistanceConstraint(holdingParticle, mouseGrabComp.particles[0], 0.02f));
-                    VerletHandler.Instance.CreateComposite(mouseGrabComp);
+                    if (Vector2.Distance(MouseGamePos, p.pos) < 200f)
+                    {
+                        interactingParticle = p;
+                        break;
+                    }
                 }
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (interactingParticle != null)
         {
-            RaycastHit info;
-            if (Physics.SphereCast(cameraRay, 5f, out info, 1000f))
+            if (Input.GetMouseButtonDown(0))
             {
-                var vPoint = info.collider.gameObject.GetComponent<VerletPoint>();
-                if (vPoint != null)
+                isHolding = true;
+                mouseGrabComp = new Composite();
+                mouseGrabComp.particles.Add(new Particle(MouseGamePos));
+                mouseGrabComp.constraints.Add(new DistanceConstraint(interactingParticle, mouseGrabComp.particles[0],
+                    0.02f));
+                VerletHandler.Instance.CreateComposite(mouseGrabComp);
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                for (int i = 0; i < VerletHandler.instance.World.composites.Count; i++)
                 {
-                    VerletHandler.instance.DestroyComposite(vPoint.parentComp);
+                    Composite c = VerletHandler.instance.World.composites[i];
+                    if (c.particles.Contains(interactingParticle))
+                    {
+                        VerletHandler.instance.DestroyComposite(c);
+                        interactingParticle = null;
+                        break;
+                    }
                 }
             }
         }
 
-        if (Input.GetMouseButtonUp(0) && holdingParticle != null)
+        if (Input.GetMouseButtonUp(0) && isHolding && interactingParticle != null)
         {
             isHolding = false;
-            holdingParticle = null;
+            interactingParticle = null;
 
             if (mouseGrabComp != null)
             {

@@ -6,13 +6,6 @@ public class VerletPoint : MonoBehaviour
     public Particle particle;
     public bool Anchored;
 
-    void Awake()
-    {
-        var col = gameObject.AddComponent<SphereCollider>();
-        col.radius = 200f / transform.lossyScale.magnitude;
-        gameObject.layer = LayerMask.NameToLayer("Points");
-    }
-
     public void LateUpdate()
     {
         transform.position = new Vector3(particle.pos.x, particle.pos.y, 0);
