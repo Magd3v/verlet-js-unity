@@ -94,7 +94,7 @@ public class VerletHandler : Singleton<VerletHandler>
 
     void FixedUpdate()
     {
-        World.Update(1);
+        World.Update(4);
 
         //Keep in bounds
         foreach (Composite c in World.composites)
