@@ -6,7 +6,7 @@ public class VerletPoint : MonoBehaviour
     public Particle particle;
     public bool Anchored;
 
-    public void LateUpdate()
+    public void FixedUpdate()
     {
         transform.position = new Vector3(particle.pos.x, particle.pos.y, 0);
     }

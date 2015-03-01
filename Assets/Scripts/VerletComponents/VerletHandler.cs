@@ -92,9 +92,9 @@ public class VerletHandler : Singleton<VerletHandler>
         World.composites.Remove(comp);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        World.Update(16);
+        World.Update(1);
 
         //Keep in bounds
         foreach (Composite c in World.composites)

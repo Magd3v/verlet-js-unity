@@ -54,7 +54,7 @@ public class MagLineRenderer : MonoBehaviour
         if (p1 == null || p2 == null) return;
         float length = (p1.transform.position - p2.transform.position).magnitude;
         transform.position = p1.transform.position;
-        transform.localScale = new Vector3(length, 1, 1);
+        transform.localScale = new Vector3(length, 0, 0);
         transform.eulerAngles = new Vector3(0, 0,
             Mathf.Atan2(p2.transform.position.y - p1.transform.position.y, p2.transform.position.x - p1.transform.position.x) * Mathf.Rad2Deg);
     }
