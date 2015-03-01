@@ -16,7 +16,6 @@ get creative! I came up with lots of cool game ideas that didn't involve collisi
 
 <b>todo:</b>
 - nicer, cleaner frontend code
-- more transparent api
 - 3d support
 
 <br>
