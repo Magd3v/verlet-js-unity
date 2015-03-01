@@ -66,7 +66,7 @@ public class VerletBody : MonoBehaviour
         transform.position = new Vector3(totalAverage.x, totalAverage.y, 0);
     }
 
-    void OnRenderObject()
+    void OnWillRenderObject()
     {
         UpdatePos();
     }
