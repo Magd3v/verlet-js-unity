@@ -17,7 +17,7 @@ get creative! I came up with lots of cool game ideas that didn't involve collisi
 <b>todo:</b>
 - nicer, cleaner frontend code
 - more transparent api
-- timescale independence
+- framerate independence
 - 3d support
 - optimize the line renderer. place vertices by shader? the current shader is weirdly slow.
 
