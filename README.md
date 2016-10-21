@@ -1,4 +1,4 @@
-verlet-js-unity by <a href="http://twitter.com/magdvv">@magdvv</a>
+verlet-js-unity by <a href="http://twitter.com/online_frog">@online_frog</a>
 
 a C# port of <a href="http://subprotocol.com/system/introducing-verlet-js.html">verlet-js</a> with some components to make it work in unity3d
 
